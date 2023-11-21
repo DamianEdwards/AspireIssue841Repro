@@ -1,0 +1,42 @@
+﻿@page "/"
+@inject AdminApiClient adminApi
+
+<PageTitle>Home</PageTitle>
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+<ol>
+    <li>@Something</li>
+    <li>@Something2s</li>
+    <li>@Something3s</li>
+    <li>@Something4s</li>
+</ol>
+
+@code {
+    private string? provider = "test";
+
+    public int Something { get; set; }
+    public int Something2s { get; set; }
+    public int Something3s { get; set; }
+    public int Something4s { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var something = await adminApi.GetApi1();
+
+        if (provider is null)
+        {
+            return;
+        }
+
+        Something = something;
+
+        Something2s = await adminApi.GetApi2();
+
+        Something3s = await adminApi.GetApi3();
+
+        Something4s = await adminApi.GetApi4();
+    }
+}
